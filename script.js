@@ -307,7 +307,6 @@ async function uploadFiles(e) {
       )
         .then((res) => res.json())
         .then((res) => res);
-      messageToggle(true);
 
       if (result.status == 'error') {
         console.error('ocurrio con la respuesta del servidor de appscript: ');
@@ -335,6 +334,8 @@ async function uploadFiles(e) {
           result.fileId;
       }
     }
+    messageToggle(true);
+
   } else {
     alert(filesInput.files.length + ' archivos cargados.');
   }
