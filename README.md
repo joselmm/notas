@@ -1,3 +1,4 @@
-# subir1
+# SUBIR
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/web-platform-sohqyn)
+Gestor de notas con una base de datos en google sheets y manejado  
+mediante una web de appscript.
