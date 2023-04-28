@@ -62,10 +62,11 @@
                    return res.json()
            }).then((json)=>{
                       console.log(json)
-             if(json.res==='ok'){
-            sessionStorage.setItem("cache", JSON.stringify(json));
-           sessionStorage.setItem("platform", "joselmm.github.io/subir");
-             }
+            if(json.res==='ok'){
+              console.log("Here we are!")
+                sessionStorage.setItem("cache", JSON.stringify(json));
+                sessionStorage.setItem("platform", "joselmm.github.io/subir");
+            }
            var keepSesion = document.querySelector("#keep-sesion").checked
            //alert(keepSesion)
            if(json.res==="ok" && keepSesion){
@@ -90,7 +91,7 @@
        
          if(sessionStorage.length &&  sessionStorage.getItem("platform") ){
             console.log("fgfgdg")
-           if(sessionStorage.getItem("platform").includes("joselmm.github.io/subir1")){
+           if(sessionStorage.getItem("platform").includes("joselmm.github.io/subir")){
             console.log("jajaj")
            
                 location.href=location.href+"app.html";
@@ -100,7 +101,8 @@
          }
          
           if(localStorage.length &&  localStorage.getItem("platform") ){
-           if(localStorage.getItem("platform").includes("joselmm.github.io/subir1")){
+           
+            if(localStorage.getItem("platform").includes("joselmm.github.io/subir")){
            
                 location.href=location.href+"app.html";
            }

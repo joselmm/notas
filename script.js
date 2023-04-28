@@ -357,3 +357,10 @@ function fileToBase64(file) {
     reader.readAsDataURL(file);
   });
 }
+
+
+function logOut() {
+  sessionStorage.clear();
+  localStorage.clear();
+  location.href=location.href.replace("app.html","")
+}
