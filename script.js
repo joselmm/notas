@@ -7,9 +7,10 @@ const $alertMessage = document.getElementById('alert-message');
 const $shadow = document.getElementById('shadow');
 const $shadowInvisible = document.getElementById('shadow-invisible');
 const $undoDeleteBTN = document.getElementById('undo-delete');
-const END_POINT =
-  'https://script.google.com/macros/s/AKfycbyUoMeRfeYzFhJCA4Sfe9EWFo6qnWezRXt_ocKpwmPJmf5aJEYupKNwmyNNN_CzKgV2/exec';
-
+const cacheParcial = sessionStorage.getItem("cache") || localStorage.getItem("cache");
+const cache = JSON.parse(cacheParcial);
+/* const cache.END_POINT = cache.END_POINT; */
+console.log(cache)
 //Funciones
 let originalTaklist = [];
 (function ocultar() {
@@ -20,7 +21,7 @@ let originalTaklist = [];
   //cargando lista
   $alertMessage.innerText = 'Cargando';
   messageToggle(false);
-  getSheetData(END_POINT, 'lista', 'takList', (list) => {
+  getSheetData(cache.END_POINT, 'lista', 'takList', (list) => {
     renderList(list);
     messageToggle(true);
     originalTaklist = list;
@@ -57,7 +58,7 @@ function saveTak() {
   sessionStorage.setItem('saved-id', id);
   var modificado = Date.now();
   var object = { tarea, id, modificado, keywords };
-  insertRows(END_POINT, 'lista', [object], 'takList', (list) => {
+  insertRows(cache.END_POINT, 'lista', [object], 'takList', (list) => {
     $('input#tak-keywords').tagsinput('removeAll');
     renderList(list);
     var id = sessionStorage.getItem('saved-id');
@@ -82,7 +83,7 @@ function updateTak() {
   var keywords = $('input#tak-keywords').val();
 
   var object = { tarea, id, keywords };
-  updateRows(END_POINT, 'lista', [object], 'id', 'takList', (list) => {
+  updateRows(cache.END_POINT, 'lista', [object], 'id', 'takList', (list) => {
     $('input#tak-keywords').tagsinput('removeAll');
     renderList(list);
     cancelEdit();
@@ -216,7 +217,7 @@ function deleteTak(e) {
   messageToggle(false);
   // guardando el objecto en el session Storage borrado
   deleteRows(
-    END_POINT,
+    cache.END_POINT,
     'lista',
     [{ id: e.target.dataset.id }],
     'id',
@@ -243,7 +244,7 @@ function undoDelete() {
   $alertMessage.innerText = 'Deshaciendo';
   messageToggle(false);
   sessionStorage.setItem('saved-id', takDeleted.id);
-  insertRows(END_POINT, 'lista', [takDeleted], null, (list) => {
+  insertRows(cache.END_POINT, 'lista', [takDeleted], null, (list) => {
     renderList(list);
     var id = sessionStorage.getItem('saved-id');
     var saved = document.getElementById(id);
@@ -298,8 +299,7 @@ async function uploadFiles(e) {
         archivo_base64: base64,
       };
 
-      var result = await fetch(
-        'https://script.google.com/macros/s/AKfycbz9GV4R7FOQOoTukIl8RDmdqw_sOy00z8H1IJDgA8dCQIMCbxO031VFF4TbwjSqBf0PIg/exec',
+      var result = await fetch(cache.ftpServer,
         {
           method: 'POST',
           body: JSON.stringify(payload),
