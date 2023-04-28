@@ -29,7 +29,7 @@
       <script type="text/javascript">
         var longitudDeDatos = sessionStorage.length || localStorage.length
         console.log(longitudDeDatos)
-         //esto estaba incluido pero no se para qque en la condicion: ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")
+         //esto estaba incluido pero no se para qque en la condicion: ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/subir1")
          if (longitudDeDatos===0 ){
               var form=document.getElementById("login");
              form.hidden=false;
@@ -89,21 +89,23 @@
          }
        
          if(sessionStorage.length &&  sessionStorage.getItem("platform") ){
-           if(sessionStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
-           cache = JSON.parse(sessionStorage.getItem("cache"));
-             $("#body").load(cache.prime);
+           if(sessionStorage.getItem("platform").includes("joselmm.github.io/subir1")){
+            console.log("jajaj")
+           
+                location.href=location.href+"app.html";
              
            }
                
          }
          
           if(localStorage.length &&  localStorage.getItem("platform") ){
-           if(localStorage.getItem("platform").includes("joselmm.github.io/miscuentas")){
-           cache = JSON.parse(localStorage.getItem("cache"));
-             $("#body").load(cache.prime);
+           if(localStorage.getItem("platform").includes("joselmm.github.io/subir1")){
+           
+                location.href=location.href+"app.html";
            }
                
          }
+         console.log("fgfgdg")
        </script>
 </body>
 </html>
