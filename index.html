@@ -29,7 +29,7 @@
       <script type="text/javascript">
         var longitudDeDatos = sessionStorage.length || localStorage.length
         console.log(longitudDeDatos)
-         //esto estaba incluido pero no se para qque en la condicion: ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/subir1")
+         //esto estaba incluido pero no se para qque en la condicion: ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/notas1")
          if (longitudDeDatos===0 ){
               var form=document.getElementById("login");
              form.hidden=false;
@@ -65,7 +65,7 @@
             if(json.res==='ok'){
               console.log("Here we are!")
                 sessionStorage.setItem("cache", JSON.stringify(json));
-                sessionStorage.setItem("platform", "joselmm.github.io/subir");
+                sessionStorage.setItem("platform", "joselmm.github.io/notas");
             }
            var keepSesion = document.querySelector("#keep-sesion").checked
            //alert(keepSesion)
@@ -91,7 +91,7 @@
        
          if(sessionStorage.length &&  sessionStorage.getItem("platform") ){
             console.log("fgfgdg")
-           if(sessionStorage.getItem("platform").includes("joselmm.github.io/subir")){
+           if(sessionStorage.getItem("platform").includes("joselmm.github.io/notas")){
             console.log("jajaj")
            
                 location.href=location.href+"app.html";
@@ -102,7 +102,7 @@
          
           if(localStorage.length &&  localStorage.getItem("platform") ){
            
-            if(localStorage.getItem("platform").includes("joselmm.github.io/subir")){
+            if(localStorage.getItem("platform").includes("joselmm.github.io/notas")){
            
                 location.href=location.href+"app.html";
            }
