@@ -14,8 +14,8 @@ console.log(cache)
 //Funciones
 let originalTaklist = [];
 (function ocultar() {
-  if (localStorage['form-hidden']) {
-    $form.hidden = JSON.parse(localStorage['form-hidden']);
+  if (document.cookie.split(";")[0]) {
+    $form.hidden = JSON.parse(document.cookie.split(";")[0].split("=")[1]);
   }
 
   //cargando lista
@@ -259,7 +259,7 @@ function undoDelete() {
 
 function closeWindowADDTak() {
   $form.hidden = !$form.hidden;
-  localStorage.setItem('form-hidden', $form.hidden);
+  localStorage.cookie='form-hidden='+ $form.hidden;
 }
 
 //ocultar();
