@@ -259,7 +259,7 @@ function undoDelete() {
 
 function closeWindowADDTak() {
   $form.hidden = !$form.hidden;
-  localStorage.cookie='form-hidden='+ $form.hidden;
+  document.cookie='form-hidden='+ $form.hidden;
 }
 
 //ocultar();
