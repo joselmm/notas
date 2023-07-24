@@ -89,25 +89,24 @@
        
          }
        
-         if(sessionStorage.length &&  sessionStorage.getItem("platform") ){
-            console.log("fgfgdg")
-           if(sessionStorage.getItem("platform").includes("joselmm.github.io/notas")){
-            console.log("jajaj")
-           
-                location.href=location.href+"app.html";
-             
-           }
-               
-         }
-         
-          if(localStorage.length &&  localStorage.getItem("platform") ){
-           
-            if(localStorage.getItem("platform").includes("joselmm.github.io/notas")){
-           
-                location.href=location.href+"app.html";
-           }
-               
-         }
+         var sessionStorageData = JSON.parse(sessionStorage.getItem("cache"));
+    var localStorageData = JSON.parse(localStorage.getItem("cache"));
+
+    if (!sessionStorageData && !localStorageData) {
+        // Show the login form
+        var form = document.getElementById("login");
+        form.hidden = false;
+
+        // Add your login form submission logic here
+        // ...
+
+    } else {
+        // User already logged in, redirect to app.html
+        var platform = sessionStorage.getItem("platform") || localStorage.getItem("platform");
+        if (platform && platform.includes("joselmm.github.io/notas")) {
+            location.href = "app.html";
+        }
+    }
          
        </script>
 </body>
