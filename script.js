@@ -10,6 +10,7 @@ const $undoDeleteBTN = document.getElementById('undo-delete');
 const getParams = new URLSearchParams(location.search);
 const localCacheName = getParams.get("localCacheName");
 if(localCacheName===null)location.href="/notas/";
+history.pushState(null, null, "/notas/app.html")
 const cacheParcial = sessionStorage.getItem(localCacheName) || localStorage.getItem(localCacheName);
 const cache = JSON.parse(cacheParcial);
 /* const cache.END_POINT = cache.END_POINT; */
