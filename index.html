@@ -27,10 +27,13 @@
         <button id="submit-btn" type="submit" class="btn btn-primary">Log in</button>
       </form>
       <script type="text/javascript">
-        var longitudDeDatos = sessionStorage.length || localStorage.length
-        console.log(longitudDeDatos)
+        //platform id
+        var platformId = "notas-jfguydf87324";
+        
+        
+        
          //esto estaba incluido pero no se para qque en la condicion: ||  !sessionStorage.getItem("platform").includes("joselmm.github.io/notas1")
-         if (longitudDeDatos===0 ){
+         
               var form=document.getElementById("login");
              form.hidden=false;
        var aviso = document.getElementById("aviso");	 
@@ -63,22 +66,20 @@
            }).then((json)=>{
                       console.log(json)
             if(json.res==='ok'){
-              console.log("Here we are!")
-                sessionStorage.setItem("cache", JSON.stringify(json));
-                sessionStorage.setItem("platform", "joselmm.github.io/notas");
+                sessionStorage.setItem("cache-"+platformId, JSON.stringify(json));
             }
            var keepSesion = document.querySelector("#keep-sesion").checked
            //alert(keepSesion)
            if(json.res==="ok" && keepSesion){
-                  localStorage.setItem("cache", JSON.stringify(json));
-                 localStorage.setItem("platform", "joselmm.github.io/notas");
+                  localStorage.setItem("cache-"+platformId, JSON.stringify(json));
+                 
            }
            if(json.res==='no'){
                 aviso.hidden=false;
                setTimeout(()=>{aviso.hidden=true;},3000)
              }
        
-             if(sessionStorage.getItem("cache")){
+             if(sessionStorage.getItem("cache-"+platformId)){
                location.href=location.href+"app.html";
              }
        
@@ -87,10 +88,10 @@
              }
          
        
-         }
+         
        
-         var sessionStorageData = JSON.parse(sessionStorage.getItem("cache"));
-    var localStorageData = JSON.parse(localStorage.getItem("cache"));
+         var sessionStorageData = JSON.parse(sessionStorage.getItem("cache-"+platformId));
+    var localStorageData = JSON.parse(localStorage.getItem("cache-"+platformId));
 
     if (!sessionStorageData && !localStorageData) {
         // Show the login form
@@ -102,10 +103,7 @@
 
     } else {
         // User already logged in, redirect to app.html
-        var platform = sessionStorage.getItem("platform") || localStorage.getItem("platform");
-        if (platform && platform.includes("joselmm.github.io/notas")) {
             location.href = "app.html";
-        }
     }
          
        </script>
