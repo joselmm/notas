@@ -77,7 +77,7 @@
              }
        
              if(sessionStorage.getItem("cache-"+platformId)){
-               location.href=location.href+"app.html";
+               location.href = "app.html?localCacheName=cache-"+platformId;
              }
        
          })
@@ -100,7 +100,7 @@
 
     } else {
         // User already logged in, redirect to app.html
-            location.href = "app.html";
+            location.href = "app.html?localCacheName=cache-"+platformId;
     }
          
        </script>
