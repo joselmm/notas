@@ -7,7 +7,10 @@ const $alertMessage = document.getElementById('alert-message');
 const $shadow = document.getElementById('shadow');
 const $shadowInvisible = document.getElementById('shadow-invisible');
 const $undoDeleteBTN = document.getElementById('undo-delete');
-const cacheParcial = sessionStorage.getItem("cache") || localStorage.getItem("cache");
+const getParams = new URLSearchParams(location.search);
+const localCacheName = getParams("localCacheName");
+if(localCacheName===null)location.href="/notas/";
+const cacheParcial = sessionStorage.getItem(localCacheName) || localStorage.getItem(localCacheName);
 const cache = JSON.parse(cacheParcial);
 /* const cache.END_POINT = cache.END_POINT; */
 console.log(cache)
