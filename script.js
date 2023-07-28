@@ -8,7 +8,7 @@ const $shadow = document.getElementById('shadow');
 const $shadowInvisible = document.getElementById('shadow-invisible');
 const $undoDeleteBTN = document.getElementById('undo-delete');
 const getParams = new URLSearchParams(location.search);
-const localCacheName = getParams("localCacheName");
+const localCacheName = getParams.get("localCacheName");
 if(localCacheName===null)location.href="/notas/";
 const cacheParcial = sessionStorage.getItem(localCacheName) || localStorage.getItem(localCacheName);
 const cache = JSON.parse(cacheParcial);
