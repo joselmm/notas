@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="icon" href="favicon.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Login - Mis Notas Y Archivos</title>
+</head>
+<body>
+  
+    <form id="login" hidden>
+        <div class="mb-3">
+          <label for="emailInput" class="form-label">Email address</label>
+          <input required type="text" class="form-control" id="emailInput" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="passwordInput" class="form-label">Password</label>
+          <input required type="password" class="form-control" id="passwordInput">
+      <label  hidden id="aviso" class="form-label" style='color:red'>Credenciales Incorrectas</label>
+        
+        </div>
+        <div class="mb-3">
+          <label for="keep-sesion" class="form-label">Mantener Sesion Abierta</label>
+          <input type="checkbox" id="keep-sesion">
+        </div>
+        <button id="submit-btn" type="submit" class="btn btn-primary">Log in</button>
+      </form>
+      <script type="text/javascript">
+        //platform id
+        var platformId = "notas-jfguydf87324";
+        
+        
+        var form=document.getElementById("login");
+             
+         var aviso = document.getElementById("aviso");	 
+         var emailInput = document.getElementById("emailInput");
+         emailInput.focus();
+         var passwordInput = document.getElementById("passwordInput");
+         var submitBtn = document.getElementById("submit-btn");
+       
+           emailInput.onfocus=()=>{
+           if(!aviso.hidden){aviso.hidden=true}
+           }
+            
+           passwordInput.onfocus=()=>{
+           if(!aviso.hidden){aviso.hidden=true}
+           } 
+             
+             form.onsubmit
+              = (e)=>{
+             
+             e.preventDefault();
+             fm= new FormData()
+             fm.append("data",'{"user":"'+emailInput.value+'","password":"'+passwordInput.value+'"}')
+       
+       
+           fetch("https://script.google.com/macros/s/AKfycbySn_lo8lGwi-dRUZLpW0WBaaZuMsmJiLcMXjRrBoxZugNkX7Cu1ziwRqdZbTn5gbDd/exec",{
+               method:"POST",
+               body:fm
+           }).then((res)=>{
+                   return res.json()
+           }).then((json)=>{
+                      console.log(json)
+            if(json.res==='ok'){
+                sessionStorage.setItem("cache-"+platformId, JSON.stringify(json));
+            }
+           var keepSesion = document.querySelector("#keep-sesion").checked
+           //alert(keepSesion)
+           if(json.res==="ok" && keepSesion){
+                  localStorage.setItem("cache-"+platformId, JSON.stringify(json));
+                 
+           }
+           if(json.res==='no'){
+                aviso.hidden=false;
+               setTimeout(()=>{aviso.hidden=true;},3000)
+             }
+       
+             if(sessionStorage.getItem("cache-"+platformId)){
+               location.href = "app.html?localCacheName=cache-"+platformId;
+             }
+       
+         })
+             
+             }
+         
+       
+         
+       
+         var sessionStorageData = JSON.parse(sessionStorage.getItem("cache-"+platformId));
+    var localStorageData = JSON.parse(localStorage.getItem("cache-"+platformId));
+
+    if (!sessionStorageData && !localStorageData) {
+        // Show the login form
+        var form = document.getElementById("login");
+        form.hidden = false;
+
+        // Add your login form submission logic here
+        // ...
+
+    } else {
+        // User already logged in, redirect to app.html
+            location.href = "app.html?localCacheName=cache-"+platformId;
+    }
+         
+       </script>
+</body>
+</html>
