@@ -472,7 +472,7 @@ async function uploadFiles(e) {
       )
         .then((res) => res.json())
         .then((res) => res);
-
+      result=JSON.parse(result);
       if (result.status == 'error') {
         console.error('ocurrio con la respuesta del servidor de appscript: ');
         console.log(result);
